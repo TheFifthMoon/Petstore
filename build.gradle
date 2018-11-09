@@ -1,0 +1,59 @@
+group 'org.petstore'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'java'
+
+//sourceCompatibility = 1.5
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'org.testng', name: 'testng', version: '6.9.10'
+    compile "io.github.robwin:assertj-swagger:0.8.1"
+    testCompile("org.assertj:assertj-core:3.11.1")
+    compile(group: "com.github.java-json-tools", name: "json-schema-validator", version: "2.2.10");
+}
+
+test {
+    useTestNG() {
+        useDefaultListeners = true
+//        listeners << 'org.uncommons.reportng.HTMLReporter'
+//        reports.html.destination = file("$buildDir/reports/testng")
+//        suites "src/main/resources/testng.xml"
+        includeGroups << includedGroups
+    }
+
+    beforeTest { desc ->
+        println "\n*** Starting execution of test ${desc.className}.${desc.name} ***"
+    }
+    afterTest { descriptor, result ->
+//        println "<<< Test ${descriptor.name} resulted in ${result.resultType} and took "+getElaspedTime(result.endTime - result.startTime)+" >>>\n"
+    }
+
+    testLogging {
+        showStandardStreams = true
+        exceptionFormat "full"
+    }
+}
+
+def getElaspedTime(def time) {
+
+    if(time / 1000 < 1)
+    {
+        return String.format("0 min, %.3f sec", time/1000)
+    }
+    else
+    {
+        return String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes(time),
+                TimeUnit.MILLISECONDS.toSeconds(time) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time))
+        )
+    }
+}
