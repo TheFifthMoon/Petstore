@@ -19,11 +19,6 @@ import java.util.Arrays;
 public class StoreTestCase {
     public static final String RESOURCES_PATH = System.getProperty("user.dir") + "/build/resources/test/";
 
-    @Test(groups = {"disabled"})
-    public void testTrue() {
-        Assert.assertTrue(true);
-    }
-
     @Test(groups = {"apitest"})
     public void validateThatImplementationMatchesContract() throws IOException, ProcessingException, InterruptedException {
         URL actualUrl = new URL("https://petstore.swagger.io/v2/store/inventory");
@@ -41,7 +36,6 @@ public class StoreTestCase {
         ProcessingReport report;
         report = schema.validate(actual);
         System.out.println(report);
-        Assert.assertTrue(true);
     }
 
     @AfterGroups(groups = {"apitest"})
