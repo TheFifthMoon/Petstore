@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.Arrays;
 
 public class StoreTestCase {
-    public static final String RESOURCES_PATH = System.getProperty("user.dir") + "/src/test/resources/";
+    public static final String RESOURCES_PATH = System.getProperty("user.dir") + "/build/resources/test/";
 
     @Test(groups = {"disabled"})
     public void testTrue() {
@@ -47,9 +47,6 @@ public class StoreTestCase {
     @AfterGroups(groups = {"apitest"})
     public void deleteTempFiles() {
         File resourcesFolder = new File(RESOURCES_PATH);
-        // TODO: Uncomment this line in order to make tests runnings proper.
-        // The tests should watch into the actual src/test/resources folder, not into generated build/resources one
-
-//        Arrays.stream(resourcesFolder.listFiles((f, p) -> p.endsWith("json"))).forEach(File::delete);
+        Arrays.stream(resourcesFolder.listFiles((f, p) -> p.endsWith("json"))).forEach(File::delete);
     }
 }
