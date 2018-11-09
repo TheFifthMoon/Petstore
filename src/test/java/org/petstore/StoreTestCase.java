@@ -47,6 +47,9 @@ public class StoreTestCase {
     @AfterGroups(groups = {"apitest"})
     public void deleteTempFiles() {
         File resourcesFolder = new File(RESOURCES_PATH);
+        // TODO: Uncomment this line in order to make tests runnings proper.
+        // The tests should watch into the actual src/test/resources folder, not into generated build/resources one
+
 //        Arrays.stream(resourcesFolder.listFiles((f, p) -> p.endsWith("json"))).forEach(File::delete);
     }
 }
