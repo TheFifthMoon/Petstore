@@ -38,13 +38,9 @@ test {
 }
 
 def getElaspedTime(def time) {
-
-    if(time / 1000 < 1)
-    {
-        return String.format("0 min, %.3f sec", time/1000)
-    }
-    else
-    {
+    if (time / 1000 < 1) {
+        return String.format("0 min, %.3f sec", time / 1000)
+    } else {
         return String.format("%d min, %d sec",
                 TimeUnit.MILLISECONDS.toMinutes(time),
                 TimeUnit.MILLISECONDS.toSeconds(time) -
